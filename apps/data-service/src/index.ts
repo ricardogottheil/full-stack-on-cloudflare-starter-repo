@@ -1,7 +1,20 @@
 import { WorkerEntrypoint } from 'cloudflare:workers';
+import { App } from './hono/app';
+import { initDatabase } from '@repo/data-ops/database';
 
 export default class DataService extends WorkerEntrypoint<Env> {
-	fetch(request: Request) {
-		return new Response('Hello World!');
+	constructor(ctx: ExecutionContext, env: Env) {
+		super(ctx, env);
+		initDatabase(env.DB);
 	}
+
+	fetch(request: Request) {
+		return App.fetch(request, this.env, this.ctx);
+	}
+	// queue(batch: MessageBatch<unknown>): void | Promise<void> {
+	// 	// Handle queue messages here
+	// }
+	// scheduled(controller: ScheduledController): void | Promise<void> {
+	// 	// Handle scheduled events here
+	// }
 }

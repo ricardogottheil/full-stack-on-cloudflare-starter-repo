@@ -3,15 +3,22 @@
  * https://developers.cloudflare.com/workers/wrangler/configuration/
  */
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "user-application",
-  "main": "worker/index.ts",
-  "compatibility_date": "2025-06-17",
-  "assets": {
-    "binding": "ASSETS",
-    "not_found_handling": "single-page-application",
-  },
-  "observability": {
-    "enabled": true,
-  },
+    "$schema": "node_modules/wrangler/config-schema.json",
+    "name": "user-application",
+    "main": "worker/index.ts",
+    "compatibility_date": "2025-06-17",
+    "assets": {
+        "binding": "ASSETS",
+        "not_found_handling": "single-page-application"
+    },
+    "observability": {
+        "enabled": true
+    },
+    "d1_databases": [
+        {
+            "binding": "DB",
+            "database_id": "1a0b5e06-5440-4ce0-ae23-0d42d62ac4c7",
+            "remote": true
+        }
+    ]
 }
