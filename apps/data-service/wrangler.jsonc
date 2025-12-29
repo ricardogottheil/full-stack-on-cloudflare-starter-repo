@@ -11,73 +11,146 @@
 	"observability": {
 		"enabled": true
 	},
-	"d1_databases": [
-		{
-			"binding": "DB",
-			"database_id": "1a0b5e06-5440-4ce0-ae23-0d42d62ac4c7",
-			"remote": true
-		}
-	],
-	"kv_namespaces": [
-		{
-			"binding": "CACHE",
-			"id": "48c11353e84a4fcf9e419a292fbea790",
-			"remote": true
-		}
-	],
-	"queues": {
-		"consumers": [
-			{
-				"queue": "smart-links-data-queue-stage"
-			}
-		],
-		"producers": [
-			{
-				"binding": "QUEUE",
-				"queue": "smart-links-data-queue-stage"
-			}
-		]
-	},
-	"workflows": [
-		{
-			"binding": "DESTINATION_EVALUATION_WORKFLOW",
-			"name": "destination-evaluation-workflow",
-			"class_name": "DestinationEvaluationWorkflow"
-		}
-	],
-	"browser": {
-		"binding": "VIRTUAL_BROWSER"
-	},
-	"ai": {
-		"binding": "AI",
-		"remote": true
-	},
-	"r2_buckets": [
-		{
-			"binding": "BUCKET",
-			"bucket_name": "smart-links-eval-stage"
-		}
-	],
-	"durable_objects": {
-		"bindings": [
-			{
-				"class_name": "LinkClickTracker",
-				"name": "LINK_CLICK_TRACKER_OBJECT"
+	"env": {
+		"stage": {
+			"d1_databases": [
+				{
+					"binding": "DB",
+					"database_id": "1a0b5e06-5440-4ce0-ae23-0d42d62ac4c7",
+					"remote": true
+				}
+			],
+			"kv_namespaces": [
+				{
+					"binding": "CACHE",
+					"id": "48c11353e84a4fcf9e419a292fbea790",
+					"remote": true
+				}
+			],
+			"queues": {
+				"consumers": [
+					{
+						"queue": "smart-links-data-queue-stage"
+					}
+				],
+				"producers": [
+					{
+						"binding": "QUEUE",
+						"queue": "smart-links-data-queue-stage"
+					}
+				]
 			},
-			{
-				"name": "EVALUATION_SCHEDULAR",
-				"class_name": "EvaluationScheduler"
-			}
-		]
-	},
-	"migrations": [
-		{
-			"tag": "v1",
-			"new_classes": ["EvaluationScheduler"]
+			"workflows": [
+				{
+					"binding": "DESTINATION_EVALUATION_WORKFLOW",
+					"name": "destination-evaluation-workflow",
+					"class_name": "DestinationEvaluationWorkflow"
+				}
+			],
+			"browser": {
+				"binding": "VIRTUAL_BROWSER"
+			},
+			"ai": {
+				"binding": "AI",
+				"remote": true
+			},
+			"r2_buckets": [
+				{
+					"binding": "BUCKET",
+					"bucket_name": "smart-links-eval-stage"
+				}
+			],
+			"durable_objects": {
+				"bindings": [
+					{
+						"class_name": "LinkClickTracker",
+						"name": "LINK_CLICK_TRACKER_OBJECT"
+					},
+					{
+						"name": "EVALUATION_SCHEDULAR",
+						"class_name": "EvaluationScheduler"
+					}
+				]
+			},
+			"migrations": [
+				{
+					"tag": "v1",
+					"new_classes": ["EvaluationScheduler"]
+				},
+				{
+					"tag": "v2",
+					"new_sqlite_classes": ["LinkClickTracker"]
+				}
+			]
 		},
-		{
-			"tag": "v2",
-			"new_sqlite_classes": ["LinkClickTracker"]
+		"production": {
+			"d1_databases": [
+				{
+					"binding": "DB",
+					"database_id": "59c8456d-2ae6-4536-80c2-9e9a830e3930"
+				}
+			],
+			"kv_namespaces": [
+				{
+					"binding": "CACHE",
+					"id": "6a6f5c50aa014a95b9229ef5256022df"
+				}
+			],
+			"queues": {
+				"consumers": [
+					{
+						"queue": "smart-links-data-queue-production"
+					}
+				],
+				"producers": [
+					{
+						"binding": "QUEUE",
+						"queue": "smart-links-data-queue-production"
+					}
+				]
+			},
+			"workflows": [
+				{
+					"binding": "DESTINATION_EVALUATION_WORKFLOW",
+					"name": "destination-evaluation-workflow-production",
+					"class_name": "DestinationEvaluationWorkflow"
+				}
+			],
+			"browser": {
+				"binding": "VIRTUAL_BROWSER"
+			},
+			"ai": {
+				"binding": "AI",
+				"remote": true
+			},
+			"r2_buckets": [
+				{
+					"binding": "BUCKET",
+					"bucket_name": "smart-links-eval-production"
+				}
+			],
+			"durable_objects": {
+				"bindings": [
+					{
+						"class_name": "LinkClickTracker",
+						"name": "LINK_CLICK_TRACKER_OBJECT"
+					},
+					{
+						"name": "EVALUATION_SCHEDULAR",
+						"class_name": "EvaluationScheduler"
+					}
+				]
+			},
+			"migrations": [
+				{
+					"tag": "v1",
+					"new_classes": ["EvaluationScheduler"]
+				},
+				{
+					"tag": "v2",
+					"new_sqlite_classes": ["LinkClickTracker"]
+				}
+			]
 		}
-	]
+	}
 }
