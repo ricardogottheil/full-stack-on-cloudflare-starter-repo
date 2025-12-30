@@ -14,8 +14,15 @@
     "observability": {
         "enabled": true
     },
+    "preview_urls": false,
     "env": {
         "stage": {
+            "routes": [
+                {
+                    "custom_domain": true,
+                    "pattern": "stage.ricardogottheil.dev"
+                }
+            ],
             "d1_databases": [
                 {
                     "binding": "DB",
@@ -32,6 +39,12 @@
             ]
         },
         "production": {
+            "routes": [
+                {
+                    "custom_domain": true,
+                    "pattern": "ricardogottheil.dev"
+                }
+            ],
             "d1_databases": [
                 {
                     "binding": "DB",
